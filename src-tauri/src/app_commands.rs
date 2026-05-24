@@ -2,8 +2,12 @@ use std::path::PathBuf;
 use tauri::api::dialog::blocking::FileDialogBuilder as FileDialogBuilderBlocking;
 use tauri::{Runtime, State, Window};
 
+// 加上条件编译：仅在 macOS 环境下引入这些苹果专属库
+#[cfg(target_os = "macos")]
 use cocoa::appkit::NSWindowTitleVisibility;
+#[cfg(target_os = "macos")]
 use cocoa::appkit::{NSWindow, NSWindowStyleMask};
+
 use open;
 use std::collections::HashMap;
 use std::sync::Mutex;
