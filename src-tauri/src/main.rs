@@ -3,7 +3,10 @@
     windows_subsystem = "windows"
 )]
 
-use cocoa::appkit::{NSWindow, NSWindowStyleMask};
+// 将所有 Apple 专属的依赖打包，并声明“仅在 macOS 下编译此部分”
+#[cfg(target_os = "macos")]
+use cocoa::appkit::{NSWindow, NSWindowStyleMask, NSWindowTitleVisibility};
+
 use std::collections::HashMap;
 use std::path::PathBuf;
 use tauri::api::dialog::FileDialogBuilder;
@@ -22,7 +25,6 @@ use menu::get_menu;
 
 use std::sync::Mutex;
 
-use cocoa::appkit::NSWindowTitleVisibility;
 use tauri::api::shell::open;
 use tauri::Manager;
 
